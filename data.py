@@ -1,7 +1,7 @@
 data = open('./featuresdf.csv').read()
 newdata = ''
 
-for i in range(100):
+for i in range(25):
     newdata += data
 
-open('hi.csv', 'w+').write(newdata)
+open('smaller.csv', 'w+').write(newdata)
