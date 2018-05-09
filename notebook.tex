@@ -1,0 +1,1090 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{SpotifyRankingStudy}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{figure}
+\centering
+\includegraphics{http://www.scdn.co/i/_global/open-graph-default.png}
+\caption{AltText}
+\end{figure}
+
+\hypertarget{introduction-and-motivations}{%
+\section{Introduction and
+Motivations}\label{introduction-and-motivations}}
+
+\hypertarget{proposal}{%
+\subsection{Proposal}\label{proposal}}
+
+To introduce the subject material and understand the motivations behind
+this study, we first recall our original project proposal:
+\textgreater{}As people who are like music and have received some form
+of musical training, we decided to do our data science topic on songs. A
+look at the Spotify data obtained in Kaggle has shown lists of top
+ranking songs, some song classifications, and some attributes that are
+known as ``audio analyses.'' Metrics such as ``danceability'' and
+``energy'' are given quantitative values and are available through
+Spotify's API. We intend to use this data as a data lake for our
+experiments in order to find out what Spotify looks for in a hit.
+
+\begin{quote}
+We'd like to answer questions such as ``Given today's trends, what does
+it take to make it to Spotify's top 50 songs?'' and ``What's more
+important for streaming numbers today, instrumentalness or
+danceability?'' We add the qualifier for the present because at the
+moment we do not have access to such ranking data from 2016 or earlier.
+\end{quote}
+
+\hypertarget{defining-the-question}{%
+\subsection{Defining the Question}\label{defining-the-question}}
+
+As outlined in the proposal, we'd like to find out what makes up a
+Spotify hit. Which of the audio features are the most important? What
+gets more listens - vocals-based music like rap or instrumentals like
+EDM? The potential significance of such questions are at least two-fold:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  To dvelop some sort of model that could determine if a song's
+  characteristics are enough to be a Spotify chart-topper
+\item
+  If enough data can be collected, to perhaps even correlate song
+  popularity with production techniques. For example Max Martin is a
+  producer who's considered to have a ``magic touch'' - he has produced
+  or co-written 22 Billboard Hot 100 \textbf{CHART TOPPERS}. It would be
+  interesting to find out what are his secrets to success.
+\end{enumerate}
+
+More info on Max Martin from infowetrust.com:
+
+\includegraphics{https://i1.wp.com/infowetrust.com/wp-content/uploads/2015/11/Who-is-Max-Martin-03.png?w=2100}
+\includegraphics{https://www.independent.ie/opinion/article31413539.ece/ALTERNATES/h342/2015-08-01_opi_11500704_I2.JPG}
+
+\hypertarget{other-works}{%
+\section{Other Works}\label{other-works}}
+
+\begin{verbatim}
+Many others have also tried to define or predict what makes a song a hit. These works look at a lot of the same metrics that we analyze including danceability, energy, etc…
+
+Nicholas Borg and George Hokkanen attempt to do so in an interesting manner. Support Vector Machines trained on Youtube songs and view counts performed quire poorly so rather than come up with a general predictor, they decided to tackle only a subset of genres, ten to be specific. Their data came from a dataset of features for 10000 songs which they mapped to view counts by using the Youtube API and getting the view count for the first link came up. They did not find any meaningful correlation coefficients when mapping song features to view counts. For temporal features they used a Support Vector with a string kernel. An example of a temporal feature would be spectral data. They made a similar conclusion to others in that using audio features alone would not be sufficient for detecting a hit. They spoke of the unpredictability of social markets which is in part responsible for why something is popular.
+
+Another team of researchers, led by Tijl De Bie, artificial intelligence lecturer at the University of Bristol in England, also attempted to tackle this problem. With over fifty years of top song data for Britain, they were able to create a model for predicting hit songs. With their large amount of data, they were able to take a different approach. For example, when deciding if a song made today would be a hit, hit songs, from the 2000’s would be weighed more heavily. With this, they compare the input song to hits and flops from different decades and make a decision based on its similarity with past data. They had 23 feature points included loudness, danceability, etc…. One conclusion I found interesting from their findings was that danceability did not really affect a songs performance until the 70’s. They also found loudness to be steadily increasing throughout the years. To further improve their algorithm, they look to analyze mood as well.
+
+Researchers have spent a lot of time digging into what makes people like or dislike a certain song. One experiment conducted put teens into two groups and had them rate songs. The control group saw the songs in a list with no bias towards any songs. While the other group saw the same list, but with a number of likes/dislikes for a song. They found that popular songs stayed popular and likewise for unpopular songs. Whereas, in the control group they found the ratings did not correlate with what was marked as popular/unpopular in the other group. This shows that the market certainly plays a role in our decision which makes predicting a hit that much harder.
+Musicologist Dr. Alison Pawley and Psychologist Dr. Daniel Mullensiefen, of the University of London, claimed that popularity could be determined from lyrics. This may very well be the case, considering we did not find any instrumental songs in our top song data. They examined lyrical traits such as vocal phrases, male vocals, and number of pitches.
+
+One things to take away from all of these efforts is that there are many different ways to approach this question, all of which have merit. Considering how many external factors affect our decision on why a song is good, it will be a long time before any song predictor can achieve great performance. At the very least, it is interesting to see the difference in popular songs throughout time and how they relate.
+\end{verbatim}
+
+\hypertarget{methods-and-tools}{%
+\section{Methods and Tools}\label{methods-and-tools}}
+
+\hypertarget{getting-the-data}{%
+\subsection{Getting the Data}\label{getting-the-data}}
+
+\begin{figure}
+\centering
+\includegraphics{https://kaggle2.blob.core.windows.net/competitions/kaggle/3136/media/kaggle-transparent.svg}
+\caption{AltText}
+\end{figure}
+
+For the unfamiliar, Spotify is a digital music, podcast, and video
+streaming service that provides access to more than 30 million songs.
+Spotify's Charts rank songs by the number of streams - we obtained the
+top 100 songs of 2017 to conduct our analysis. The dataset is available
+here:
+https://www.kaggle.com/nadintamer/top-tracks-of-2017/downloads/featuresdf.csv/1
+
+\hypertarget{analysis-and-visualization}{%
+\subsection{Analysis and
+Visualization}\label{analysis-and-visualization}}
+
+We will use the IPython environment to conduct our analysis, and our
+results will be reported in this notebook. We start by setting up our
+notebook with the Pandas, Seaborn,and matplotlib libraries.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        
+        \PY{k+kn}{import} \PY{n+nn}{sklearn} \PY{k}{as} \PY{n+nn}{skl}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+\end{Verbatim}
+
+
+    We then read our csv data into a dataframe. The dataset contains other
+information beyond the name of the songs and its ranking, as shown
+below. We also check that the dataset is complete and void of
+duplicates. Fortunately, our starting data is clean.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{sdata} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./featuresdf.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{sdata}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rank}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{sdata}\PY{o}{.}\PY{n}{index} \PY{o}{+}\PY{l+m+mi}{1}
+        
+        \PY{n}{sdata}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:}                       id                                name  \textbackslash{}
+        0  7qiZfU4dY1lWllzX7mPBI                        Shape of You   
+        1  5CtI0qwDJkDQGwXD1H1cL                   Despacito - Remix   
+        2  4aWmUDTfIPGksMNLV2rQP  Despacito (Featuring Daddy Yankee)   
+        3  6RUKPb4LETWmmr3iAEQkt            Something Just Like This   
+        4  3DXncPQOG4VBw3QHh3S81                         I'm the One   
+        5  7KXjTSCq5nL1LoYtL7XAw                             HUMBLE.   
+        6  3eR23VReFzcdmS7TYCrhC     It Ain't Me (with Selena Gomez)   
+        7  3B54sVLJ402zGa6Xm4YGN                       Unforgettable   
+        
+                    artists  danceability  energy   key  loudness  mode  speechiness  \textbackslash{}
+        0        Ed Sheeran         0.825   0.652   1.0    -3.183   0.0       0.0802   
+        1        Luis Fonsi         0.694   0.815   2.0    -4.328   1.0       0.1200   
+        2        Luis Fonsi         0.660   0.786   2.0    -4.757   1.0       0.1700   
+        3  The Chainsmokers         0.617   0.635  11.0    -6.769   0.0       0.0317   
+        4         DJ Khaled         0.609   0.668   7.0    -4.284   1.0       0.0367   
+        5    Kendrick Lamar         0.904   0.611   1.0    -6.842   0.0       0.0888   
+        6              Kygo         0.640   0.533   0.0    -6.596   1.0       0.0706   
+        7    French Montana         0.726   0.769   6.0    -5.043   1.0       0.1230   
+        
+           acousticness  instrumentalness  liveness  valence    tempo  duration\_ms  \textbackslash{}
+        0      0.581000          0.000000    0.0931    0.931   95.977     233713.0   
+        1      0.229000          0.000000    0.0924    0.813   88.931     228827.0   
+        2      0.209000          0.000000    0.1120    0.846  177.833     228200.0   
+        3      0.049800          0.000014    0.1640    0.446  103.019     247160.0   
+        4      0.055200          0.000000    0.1670    0.811   80.924     288600.0   
+        5      0.000259          0.000020    0.0976    0.400  150.020     177000.0   
+        6      0.119000          0.000000    0.0864    0.515   99.968     220781.0   
+        7      0.029300          0.010100    0.1040    0.733   97.985     233902.0   
+        
+           time\_signature  rank  
+        0             4.0     1  
+        1             4.0     2  
+        2             4.0     3  
+        3             4.0     4  
+        4             4.0     5  
+        5             4.0     6  
+        6             4.0     7  
+        7             4.0     8  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{sdata}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 100 entries, 0 to 99
+Data columns (total 17 columns):
+id                  100 non-null object
+name                100 non-null object
+artists             100 non-null object
+danceability        100 non-null float64
+energy              100 non-null float64
+key                 100 non-null float64
+loudness            100 non-null float64
+mode                100 non-null float64
+speechiness         100 non-null float64
+acousticness        100 non-null float64
+instrumentalness    100 non-null float64
+liveness            100 non-null float64
+valence             100 non-null float64
+tempo               100 non-null float64
+duration\_ms         100 non-null float64
+time\_signature      100 non-null float64
+rank                100 non-null int64
+dtypes: float64(13), int64(1), object(3)
+memory usage: 13.4+ KB
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{}check for duplicates}
+        \PY{n+nb}{len}\PY{p}{(}\PY{n}{sdata}\PY{p}{[}\PY{n}{sdata}\PY{o}{.}\PY{n}{duplicated}\PY{p}{(}\PY{p}{)} \PY{o}{==} \PY{k+kc}{True}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:} 0
+\end{Verbatim}
+            
+    \hypertarget{the-data-fields}{%
+\subsection{The Data Fields}\label{the-data-fields}}
+
+We now examine the fields within the data set. The first 3 fields are
+arranged as follows: + \textbf{id}: + Spotify URI + \textbf{name}: +
+title + \textbf{artists}: + contributing artists
+
+The following fields are song attributes or audio features that are
+provided by Spotify via the Spotify API (descriptions taken from
+https://beta.developer.spotify.com/documentation/web-api/reference/tracks/get-several-audio-features/):
++ \textbf{danceability}: + describes how suitable a track is for dancing
+based on a combination of musical elements including tempo, rhythm
+stability, beat strength, and overall regularity. + value of 0.0 is
+least danceable and 1.0 is most danceable. + \textbf{energy}: + measure
+from 0.0 to 1.0 which represents a perceptual measure of intensity and
+activity. Typically, energetic tracks feel fast, loud, and noisy. For
+example, death metal has high energy, while a Bach prelude scores low on
+the scale. + perceptual features contributing to this attribute include
+dynamic range, perceived loudness, timbre, onset rate, and general
+entropy. + \textbf{key}: + the key the track is in. + integers map to
+pitches using standard Pitch Class notation. E.g. 0 = C, 1 = C♯/D♭, 2 =
+D, and so on. + \textbf{loudness}:\\
++ overall loudness of a track in decibels (dB). Loudness values are
+averaged across the entire track and are useful for comparing relative
+loudness of tracks. + values typical range between -60 and 0 db. +
+\textbf{mode}: + indicates the modality (major or minor) of a track, the
+type of scale from which its melodic content is derived. + major is
+represented by 1 and minor is 0. + \textbf{speechiness}:\\
++ detects the presence of spoken words in a track. The more exclusively
+speech-like the recording (e.g.~talk show, audio book, poetry), the
+closer to 1.0 the attribute value. + values above 0.66 describe tracks
+that are probably made entirely of spoken words. + values between 0.33
+and 0.66 describe tracks that may contain both music and speech. +
+values below 0.33 most likely represent music and other non-speech-like
+tracks. + \textbf{acousticness}: + confidence measure from 0.0 to 1.0 of
+whether the track is acoustic. + 1.0 represents high confidence the
+track is acoustic. + \textbf{instrumentalness}: + predicts whether a
+track contains no vocals. ``Ooh'' and ``aah'' sounds are treated as
+instrumental in this context. + values above 0.5 are intended to
+represent instrumental tracks, but confidence is higher as the value
+approaches 1.0. + \textbf{liveness}: + detects the presence of an
+audience in the recording. + value above 0.8 provides strong likelihood
+that the track is live. + \textbf{valence}: + measure from 0.0 to 1.0
+describing the musical positiveness conveyed by a track. Tracks with
+high valence sound more positive (e.g.~happy, cheerful, euphoric), while
+tracks with low valence sound more negative (e.g.~sad, depressed,
+angry). + \textbf{tempo}:\\
++ overall estimated tempo of a track in beats per minute (BPM). +
+derives directly from the average beat duration. +
+\textbf{duration\_ms}: + duration of the track in milliseconds. +
+\textbf{time\_signature}: + estimated overall time signature of a track.
+The time signature (meter) is a notational convention to specify how
+many beats are in each bar (or measure).
+
+    \hypertarget{preliminary-analysis}{%
+\section{Preliminary Analysis}\label{preliminary-analysis}}
+
+To get a general feel of what the data distribution is for our dataset,
+we first plot each column as a histogram.
+
+\hypertarget{histograms}{%
+\subsection{Histograms}\label{histograms}}
+
+To construct the histograms, we first divide the range of values into
+``bins,'' or intervals. The bin size is first determined using Sturge's
+rule:
+
+\[k = 1 + 3.322 * \log_{10}{n}\]
+
+where k is the number of classes and n is the number of total
+observations (which is 100 in this case).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} Distplot each of the song attributes}
+        
+        \PY{n}{fig1\PYZus{}1} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,} \PY{l+m+mi}{56}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{pal} \PY{o}{=} \PY{n}{sns}\PY{o}{.}\PY{n}{color\PYZus{}palette}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bright}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+m+mi}{13}\PY{p}{)}
+        
+        \PY{k}{for} \PY{n}{num} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{14}\PY{p}{)}\PY{p}{:}
+            \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{14}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{num}\PY{p}{)}
+            \PY{n}{a} \PY{o}{=} \PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{(}\PY{n}{sdata}\PY{p}{[}\PY{n+nb}{list}\PY{p}{(}\PY{n}{sdata}\PY{p}{)}\PY{p}{[}\PY{n}{num} \PY{o}{+} \PY{l+m+mi}{2}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{bins}\PY{o}{=} \PY{l+m+mi}{35}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{n}{pal}\PY{p}{[}\PY{n}{num} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{rug} \PY{o}{=} \PY{k+kc}{True}\PY{p}{,} \PY{n}{kde} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}
+            \PY{n}{a}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n}{sdata}\PY{p}{)}\PY{p}{[}\PY{n}{num}\PY{o}{+}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{15}\PY{p}{)}
+           
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/Users/bigolu/.pyenv/versions/3.6.4/envs/cs439/lib/python3.6/site-packages/matplotlib/axes/\_axes.py:6462: UserWarning: The 'normed' kwarg is deprecated, and has been replaced by the 'density' kwarg.
+  warnings.warn("The 'normed' kwarg is deprecated, and has been "
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_8_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    First thoughts on examining the data representation: + Popular songs
+have a 4/4 time signature + Popular songs have vocals + There is a rough
+40/60 split between the tracks that use a minor key and the tracks that
+use a major key - one does category does not dominate the other We
+realize that it is better to know the modality and the key of a track
+together as a distinct data point. Hence, we introduce a new category of
+\textbf{keyscore} through a simple formula:
+
+\[keyscore = key + 0.5*mode\]
+
+In addition, we notice that loudness scores are negative numbers. This
+can can result in a false negative correlation. The loudness of the
+tracks are calculated using:
+
+\[loudness = 10\log_{10}{\frac{P_2}{P_1}}\]
+
+Where \(P_2\) is the average sound pressure of the track and \(P_1\) is
+the highest sound pressure value reached by the track. We change the
+sign by using:
+
+\[power\_ratio = 10^{loudness/10}\]
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{fig1\PYZus{}2} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{30}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+        
+        
+        \PY{n}{sdata}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{keyscore}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{sdata}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{key}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{+} \PY{l+m+mf}{0.5} \PY{o}{*} \PY{n}{sdata}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mode}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{sdata}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{power\PYZus{}ratio}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{10} \PY{o}{*}\PY{o}{*} \PY{p}{(}\PY{n}{sdata}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{loudness}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{/} \PY{l+m+mi}{10}\PY{p}{)} 
+        \PY{n}{ks} \PY{o}{=} \PY{n}{fig1\PYZus{}2}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+        
+        \PY{n}{ks}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{keyscore}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{15}\PY{p}{)}
+        
+        \PY{n}{ks} \PY{o}{=} \PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{(}\PY{n}{sdata}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{keyscore}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{22}\PY{p}{,} \PY{c+c1}{\PYZsh{}22 keys + mode pairs}
+                         \PY{n}{color} \PY{o}{=} \PY{n}{pal}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{,} \PY{n}{rug} \PY{o}{=} \PY{k+kc}{True}\PY{p}{,} \PY{n}{kde} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}
+        
+        \PY{n}{pr} \PY{o}{=} \PY{n}{fig1\PYZus{}2}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+        
+        \PY{n}{pr}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{power\PYZus{}ratio}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=}\PY{l+m+mi}{15}\PY{p}{)}
+        
+        \PY{n}{pr} \PY{o}{=} \PY{n}{sns}\PY{o}{.}\PY{n}{distplot}\PY{p}{(}\PY{n}{sdata}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{power\PYZus{}ratio}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{bins} \PY{o}{=} \PY{l+m+mi}{34}\PY{p}{,} 
+                         \PY{n}{color} \PY{o}{=} \PY{n}{pal}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{,} \PY{n}{rug} \PY{o}{=} \PY{k+kc}{True}\PY{p}{,} \PY{n}{kde} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/Users/bigolu/.pyenv/versions/3.6.4/envs/cs439/lib/python3.6/site-packages/matplotlib/axes/\_axes.py:6462: UserWarning: The 'normed' kwarg is deprecated, and has been replaced by the 'density' kwarg.
+  warnings.warn("The 'normed' kwarg is deprecated, and has been "
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_10_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{examining-correlations}{%
+\section{Examining Correlations}\label{examining-correlations}}
+
+From the knowledge gained above, we render time\_signature,
+instrumentalness, key, and mode as relatively irrelevant variables. With
+the addition of the keyscore metric, there are now 10 different
+dimensions to examine, with only 100 data points. It is beneficial to
+reduce data dimensionality in order to restrict analysis to the most
+relevant features. We use a heatmap to investigate how strongly data
+columns correlate with each other.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{relevant} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{danceability}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{energy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{keyscore}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{power\PYZus{}ratio}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{speechiness}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{acousticness}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{liveness}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{valence}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tempo}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{duration\PYZus{}ms}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+        
+        \PY{n}{heatmapdf} \PY{o}{=} \PY{n}{sdata}\PY{p}{[}\PY{n}{relevant}\PY{p}{]}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+        
+        \PY{n}{correlation} \PY{o}{=} \PY{n}{heatmapdf}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Column Correlation Heatmap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n}{sns}\PY{o}{.}\PY{n}{heatmap}\PY{p}{(}\PY{n}{correlation}\PY{p}{,} \PY{n}{vmax}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{square}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}\PY{n}{annot}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x117a1f518>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_12_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{pca}{%
+\subsection{PCA}\label{pca}}
+
+The components do not demonstrate a lot of correlation. Most of the
+variables are in fact negatively correlated, but there are four pairwise
+comparisons of note: 1. power\_ratio and energy 2. valence and
+danceability 3. valence and energy 4. power\_ratio and valence
+
+Recall that our original goal is to come up with some model for
+determining what makes a song popular. With the keyscore and
+power\_ratio metrics, there are 10 dimensions to manage. We may reduce
+the dimensionality through the use of PCA and visualize any clustering
+with t-SNE. However, just by our cursory pair-wise comparisions, we
+already know what the four most relevant variables are. We compare
+conducting PCA across all 10 dimensions versus conducting PCA across
+power\_ratio, energy, valence, and danceability only.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{decomposition} \PY{k}{import} \PY{n}{PCA}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{StandardScaler}
+        \PY{k+kn}{from} \PY{n+nn}{mpl\PYZus{}toolkits}\PY{n+nn}{.}\PY{n+nn}{mplot3d} \PY{k}{import} \PY{n}{Axes3D}
+        
+        
+        
+        
+        
+        \PY{n}{relevant} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{danceability}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{energy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{power\PYZus{}ratio}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{valence}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+        \PY{n}{entries} \PY{o}{=} \PY{n}{sdata}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{energy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{}must standardize}
+        \PY{n}{x} \PY{o}{=} \PY{n}{sdata}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{relevant}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+        \PY{n}{x} \PY{o}{=} \PY{n}{StandardScaler}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}pca}
+        \PY{n}{songpca} \PY{o}{=} \PY{n}{PCA}\PY{p}{(}\PY{n}{n\PYZus{}components}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+        \PY{n}{songpca}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+        \PY{n}{components} \PY{o}{=} \PY{n}{songpca}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+        
+        
+        \PY{n}{pca\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{data} \PY{o}{=} \PY{n}{components}\PY{p}{)}
+        
+        \PY{n}{pca\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{pca\PYZus{}df}\PY{p}{,} \PY{n}{entries}\PY{p}{]}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{pca\PYZus{}df}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pca1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pca2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pca3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{energy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                                
+        \PY{c+c1}{\PYZsh{}visualize}
+        \PY{n}{fig2\PYZus{}1} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{25}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+        \PY{n}{a} \PY{o}{=}  \PY{n}{fig2\PYZus{}1}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{projection} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}a = Axes3D(fig2\PYZus{}1.add\PYZus{}subplot(1,2,1))}
+        \PY{n}{a}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{pca\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pca1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{pca\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pca2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{pca\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pca3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{n}{pca\PYZus{}df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{energy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{winter}\PY{p}{,} \PY{n}{s} \PY{o}{=} \PY{l+m+mi}{300}\PY{p}{)}
+        
+        \PY{n}{a}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Component 1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{15}\PY{p}{)}
+        \PY{n}{a}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Component 2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{15}\PY{p}{)}
+        \PY{n}{a}\PY{o}{.}\PY{n}{set\PYZus{}zlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Component 3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{15}\PY{p}{)}
+        
+        \PY{n}{a}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3\PYZhy{}component PCA(limited)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{20}\PY{p}{)}
+        
+        
+        \PY{n}{a}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{p}{)}
+        
+        
+        \PY{n}{fig2\PYZus{}2} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{25}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{b} \PY{o}{=} \PY{n}{fig2\PYZus{}2}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+        
+        \PY{n}{b}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{pca\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pca1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{pca\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pca2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{n}{pca\PYZus{}df}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pca3}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{winter} \PY{p}{,} \PY{n}{s} \PY{o}{=} \PY{l+m+mi}{300}\PY{p}{)}
+        
+        \PY{n}{b}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Component 1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{15}\PY{p}{)}
+        \PY{n}{b}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Component 2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{15}\PY{p}{)}
+        
+        \PY{n}{b}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2\PYZhy{}component PCA(limited)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{20}\PY{p}{)}
+        
+        
+        \PY{n}{b}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{p}{)}
+        
+        
+        \PY{n}{notallrelevant} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{danceability}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{energy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{keyscore}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{power\PYZus{}ratio}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{speechiness}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{acousticness}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{liveness}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{valence}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tempo}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{duration\PYZus{}ms}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+        \PY{n}{entries2} \PY{o}{=} \PY{n}{sdata}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{energy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+        
+        \PY{c+c1}{\PYZsh{}must standardize}
+        \PY{n}{x} \PY{o}{=} \PY{n}{sdata}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{notallrelevant}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+        \PY{n}{x} \PY{o}{=} \PY{n}{StandardScaler}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}pca}
+        \PY{n}{songpca2} \PY{o}{=} \PY{n}{PCA}\PY{p}{(}\PY{n}{n\PYZus{}components}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+        \PY{n}{songpca2}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+        \PY{n}{components2} \PY{o}{=} \PY{n}{songpca2}\PY{o}{.}\PY{n}{transform}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+        
+        
+        \PY{n}{pca\PYZus{}df2} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{data} \PY{o}{=} \PY{n}{components2}\PY{p}{)}
+        
+        \PY{n}{pca\PYZus{}df2} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{pca\PYZus{}df2}\PY{p}{,} \PY{n}{entries2}\PY{p}{]}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{pca\PYZus{}df2}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pca1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pca2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pca3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{energy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+                                
+        \PY{c+c1}{\PYZsh{}visualize}
+        \PY{n}{c} \PY{o}{=}  \PY{n}{fig2\PYZus{}1}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{n}{projection} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3d}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}a = Axes3D(fig2\PYZus{}1.add\PYZus{}subplot(1,2,1))}
+        \PY{n}{c}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{pca\PYZus{}df2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pca1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{pca\PYZus{}df2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pca2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{pca\PYZus{}df2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pca3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{n}{pca\PYZus{}df2}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pca3}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{winter}\PY{p}{,} \PY{n}{s} \PY{o}{=} \PY{l+m+mi}{300}\PY{p}{)}
+        
+        \PY{n}{c}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Component 1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{15}\PY{p}{)}
+        \PY{n}{c}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Component 2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{15}\PY{p}{)}
+        \PY{n}{c}\PY{o}{.}\PY{n}{set\PYZus{}zlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Component 3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{15}\PY{p}{)}
+        
+        \PY{n}{c}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{3\PYZhy{}component PCA(all)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{20}\PY{p}{)}
+        
+        
+        
+        \PY{n}{c}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{p}{)}
+        
+        
+        
+        \PY{n}{d} \PY{o}{=} \PY{n}{fig2\PYZus{}2}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+        
+        \PY{n}{d}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{pca\PYZus{}df2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pca1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{pca\PYZus{}df2}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pca2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{n}{pca\PYZus{}df2}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pca3}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{winter}\PY{p}{,} \PY{n}{s} \PY{o}{=} \PY{l+m+mi}{300}\PY{p}{)}
+        
+        \PY{n}{d}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Component 1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{15}\PY{p}{)}
+        \PY{n}{d}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Component 2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{15}\PY{p}{)}
+        
+        \PY{n}{d}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2\PYZhy{}component PCA(all)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{20}\PY{p}{)}
+        
+        
+        
+        \PY{n}{d}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Our comparisions are better seen by comparing explained variance ratios.
+It is evident that a priori knowledge of correlated variables leads to
+more coherent summary results.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{variance ratios(limited): }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{songpca}\PY{o}{.}\PY{n}{explained\PYZus{}variance\PYZus{}ratio\PYZus{}}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{total(limited): }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n+nb}{sum}\PY{p}{(}\PY{n}{songpca}\PY{o}{.}\PY{n}{explained\PYZus{}variance\PYZus{}ratio\PYZus{}}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{variance ratios(all): }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{songpca2}\PY{o}{.}\PY{n}{explained\PYZus{}variance\PYZus{}ratio\PYZus{}}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{total(all): }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n+nb}{sum}\PY{p}{(}\PY{n}{songpca2}\PY{o}{.}\PY{n}{explained\PYZus{}variance\PYZus{}ratio\PYZus{}}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+variance ratios(limited): [0.50818568 0.30336555 0.11520664]
+total(limited): 0.9267578749495853
+variance ratios(all): [0.22989486 0.17033659 0.11685808]
+total(all): 0.5170895369550347
+
+    \end{Verbatim}
+
+    \hypertarget{t-sne}{%
+\subsection{t-SNE}\label{t-sne}}
+
+Conducting t-SNE dimension reduction on data also demonstrates
+differences in clustering. Not only is there an observable difference in
+cluster size and order, there is also a distinct separation among the
+data points. The color gradients imposed on the following graphs map to
+the energy levels of a given song, which is believed to be a strongly
+associated component with popularity.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{MinMaxScaler}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{manifold} \PY{k}{import} \PY{n}{TSNE}
+         
+         \PY{n}{t\PYZus{}sne\PYZus{}all} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{danceability}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{energy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{keyscore}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{power\PYZus{}ratio}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{speechiness}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{acousticness}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{liveness}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{valence}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tempo}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{duration\PYZus{}ms}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         
+         \PY{n}{X} \PY{o}{=} \PY{n}{sdata}\PY{p}{[}\PY{n}{t\PYZus{}sne\PYZus{}all}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+         \PY{c+c1}{\PYZsh{}standardize}
+         
+         \PY{n}{mm\PYZus{}scaler} \PY{o}{=} \PY{n}{MinMaxScaler}\PY{p}{(}\PY{p}{)}
+         \PY{n}{X} \PY{o}{=} \PY{n}{mm\PYZus{}scaler}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+         
+         \PY{n}{tsne} \PY{o}{=} \PY{n}{TSNE}\PY{p}{(}\PY{n}{n\PYZus{}components}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{verbose}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{perplexity}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{n\PYZus{}iter}\PY{o}{=}\PY{l+m+mi}{475}\PY{p}{)}
+         \PY{n}{tsne\PYZus{}results} \PY{o}{=} \PY{n}{tsne}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+         
+         \PY{n}{fig3\PYZus{}1} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{25}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{tp} \PY{o}{=} \PY{n}{fig3\PYZus{}1}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{n}{tp}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{tsne\PYZus{}results}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{tsne\PYZus{}results}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{n}{sdata}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{energy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{winter} \PY{p}{,} \PY{n}{s} \PY{o}{=} \PY{l+m+mi}{300}\PY{p}{)}
+         \PY{n}{tp}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{15}\PY{p}{)}
+         \PY{n}{tp}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{15}\PY{p}{)}
+         
+         \PY{n}{tp}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2\PYZhy{}component t\PYZhy{}SNE(all)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n}{tp}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{axes} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{gca}\PY{p}{(}\PY{p}{)}
+         \PY{n}{axes}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{]}\PY{p}{)}
+         \PY{n}{axes}\PY{o}{.}\PY{n}{set\PYZus{}xlim}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{]}\PY{p}{)}
+         
+         
+         \PY{n}{t\PYZus{}sne\PYZus{}relevant} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{danceability}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{energy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{power\PYZus{}ratio}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{valence}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{Y} \PY{o}{=} \PY{n}{sdata}\PY{p}{[}\PY{n}{t\PYZus{}sne\PYZus{}relevant}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+         \PY{c+c1}{\PYZsh{}standardize}
+         
+         \PY{n}{mm\PYZus{}scaler} \PY{o}{=} \PY{n}{MinMaxScaler}\PY{p}{(}\PY{p}{)}
+         \PY{n}{Y} \PY{o}{=} \PY{n}{mm\PYZus{}scaler}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{Y}\PY{p}{)}
+         
+         \PY{n}{tsnel} \PY{o}{=} \PY{n}{TSNE}\PY{p}{(}\PY{n}{n\PYZus{}components}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{verbose}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{perplexity}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{n\PYZus{}iter}\PY{o}{=}\PY{l+m+mi}{475}\PY{p}{)}
+         \PY{n}{tsne\PYZus{}resultsl} \PY{o}{=} \PY{n}{tsnel}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{Y}\PY{p}{)}
+         
+         \PY{n}{tpl} \PY{o}{=} \PY{n}{fig3\PYZus{}1}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+         
+         \PY{n}{tpl}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{tsne\PYZus{}resultsl}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{tsne\PYZus{}resultsl}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{n}{sdata}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{energy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{winter} \PY{p}{,} \PY{n}{s} \PY{o}{=} \PY{l+m+mi}{300}\PY{p}{)}
+         \PY{n}{tpl}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{15}\PY{p}{)}
+         \PY{n}{tpl}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{15}\PY{p}{)}
+         
+         \PY{n}{tpl}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2\PYZhy{}component t\PYZhy{}SNE(limited)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n}{tpl}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{axesl} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{gca}\PY{p}{(}\PY{p}{)}
+         \PY{n}{axesl}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{]}\PY{p}{)}
+         \PY{n}{axesl}\PY{o}{.}\PY{n}{set\PYZus{}xlim}\PY{p}{(}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{100}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[t-SNE] Computing 31 nearest neighbors{\ldots}
+[t-SNE] Indexed 100 samples in 0.004s{\ldots}
+[t-SNE] Computed neighbors for 100 samples in 0.002s{\ldots}
+[t-SNE] Computed conditional probabilities for sample 100 / 100
+[t-SNE] Mean sigma: 0.279653
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 70.092010
+[t-SNE] Error after 475 iterations: 1.076878
+[t-SNE] Computing 31 nearest neighbors{\ldots}
+[t-SNE] Indexed 100 samples in 0.002s{\ldots}
+[t-SNE] Computed neighbors for 100 samples in 0.002s{\ldots}
+[t-SNE] Computed conditional probabilities for sample 100 / 100
+[t-SNE] Mean sigma: 0.147734
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 69.250175
+[t-SNE] Error after 475 iterations: 0.789683
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:} (-100, 100)
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_18_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{sanity-check}{%
+\subsection{Sanity Check}\label{sanity-check}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{linear\PYZus{}model}
+         \PY{n}{fig4} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{30}\PY{p}{,}\PY{l+m+mi}{30}\PY{p}{)}\PY{p}{)}
+         \PY{n}{relevant} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{rank}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{danceability}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{energy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{power\PYZus{}ratio}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{valence}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{name}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         
+         
+         \PY{n}{v} \PY{o}{=} \PY{n}{sdata}\PY{p}{[}\PY{n}{relevant}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+         
+         \PY{n}{xd} \PY{o}{=} \PY{n}{sdata}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{danceability}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+         \PY{n}{yd} \PY{o}{=} \PY{l+m+mi}{100} \PY{o}{\PYZhy{}} \PY{n}{sdata}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{rank}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+         
+         \PY{c+c1}{\PYZsh{}print(v)}
+         \PY{n}{dnc} \PY{o}{=} \PY{n}{fig4}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         
+         \PY{n}{dnc}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{xd}\PY{p}{,} \PY{n}{yd}\PY{p}{,} \PY{n}{c} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{green}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{s} \PY{o}{=} \PY{l+m+mi}{300}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{txt} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{v}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+             \PY{n}{dnc}\PY{o}{.}\PY{n}{annotate}\PY{p}{(}\PY{n}{txt}\PY{p}{,} \PY{p}{(}\PY{n}{xd}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{+} \PY{o}{.}\PY{l+m+mi}{01}\PY{p}{,} \PY{l+m+mi}{2} \PY{o}{+} \PY{n}{yd}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+             
+         
+         \PY{n}{xd} \PY{o}{=} \PY{n}{xd}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{xd}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{yd} \PY{o}{=} \PY{n}{yd}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{yd}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{n}{regrd} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}
+         \PY{n}{regrd}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{xd}\PY{p}{,} \PY{n}{yd}\PY{p}{)}
+         \PY{n}{dnc}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{xd}\PY{p}{,} \PY{n}{regrd}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{xd}\PY{p}{)}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{black}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+         \PY{n}{dnc}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Danceability vs Popularity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n}{dnc}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{danceability}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{15}\PY{p}{)}
+         \PY{n}{dnc}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{popularity (100 \PYZhy{} rank)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{15}\PY{p}{)}
+         
+         \PY{n}{xe} \PY{o}{=} \PY{n}{sdata}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{energy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+         \PY{n}{ye} \PY{o}{=} \PY{l+m+mi}{100} \PY{o}{\PYZhy{}} \PY{n}{sdata}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{rank}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+         
+         \PY{c+c1}{\PYZsh{}print(v)}
+         \PY{n}{eng} \PY{o}{=} \PY{n}{fig4}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}
+         
+         
+         \PY{n}{eng}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{xe}\PY{p}{,} \PY{n}{ye}\PY{p}{,} \PY{n}{c} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{s} \PY{o}{=} \PY{l+m+mi}{300}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{txt} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{v}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+             \PY{n}{eng}\PY{o}{.}\PY{n}{annotate}\PY{p}{(}\PY{n}{txt}\PY{p}{,} \PY{p}{(}\PY{n}{xe}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{+} \PY{o}{.}\PY{l+m+mi}{01}\PY{p}{,} \PY{l+m+mi}{2} \PY{o}{+} \PY{n}{ye}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+             
+         
+         \PY{n}{xe} \PY{o}{=} \PY{n}{xe}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{xe}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{ye} \PY{o}{=} \PY{n}{ye}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{ye}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{n}{regre} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}
+         \PY{n}{regre}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{xe}\PY{p}{,} \PY{n}{ye}\PY{p}{)}
+         \PY{n}{eng}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{xe}\PY{p}{,} \PY{n}{regrd}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{xe}\PY{p}{)}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{black}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+         \PY{n}{eng}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Energy vs Popularity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n}{eng}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{energy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{15}\PY{p}{)}
+         \PY{n}{eng}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{popularity (100 \PYZhy{} rank)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{15}\PY{p}{)}
+         
+         
+         \PY{n}{xp} \PY{o}{=} \PY{n}{sdata}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{power\PYZus{}ratio}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+         \PY{n}{yp} \PY{o}{=} \PY{l+m+mi}{100} \PY{o}{\PYZhy{}} \PY{n}{sdata}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{rank}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+         
+         \PY{c+c1}{\PYZsh{}print(v)}
+         \PY{n}{pwr} \PY{o}{=} \PY{n}{fig4}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}
+         
+         
+         \PY{n}{pwr}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{xp}\PY{p}{,} \PY{n}{yp}\PY{p}{,} \PY{n}{c} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{red}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{s} \PY{o}{=} \PY{l+m+mi}{300}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{txt} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{v}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+             \PY{n}{pwr}\PY{o}{.}\PY{n}{annotate}\PY{p}{(}\PY{n}{txt}\PY{p}{,} \PY{p}{(}\PY{n}{xp}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{+} \PY{o}{.}\PY{l+m+mi}{01}\PY{p}{,} \PY{l+m+mi}{2} \PY{o}{+} \PY{n}{yp}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+             
+         
+         \PY{n}{xp} \PY{o}{=} \PY{n}{xp}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{xp}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{yp} \PY{o}{=} \PY{n}{yp}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{yp}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{n}{regrp} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}
+         \PY{n}{regrp}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{xp}\PY{p}{,} \PY{n}{yp}\PY{p}{)}
+         \PY{n}{pwr}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{xp}\PY{p}{,} \PY{n}{regrp}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{xp}\PY{p}{)}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{black}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+         \PY{n}{pwr}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Power Ratio vs Popularity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n}{pwr}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{power\PYZus{}ratio}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{15}\PY{p}{)}
+         \PY{n}{pwr}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{popularity (100 \PYZhy{} rank)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{15}\PY{p}{)}
+         
+         \PY{n}{xv} \PY{o}{=} \PY{n}{sdata}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{valence}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+         \PY{n}{yv} \PY{o}{=} \PY{l+m+mi}{100} \PY{o}{\PYZhy{}} \PY{n}{sdata}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{rank}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+         
+         \PY{c+c1}{\PYZsh{}print(v)}
+         \PY{n}{val} \PY{o}{=} \PY{n}{fig4}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}
+         
+         
+         \PY{n}{val}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{xv}\PY{p}{,} \PY{n}{yv}\PY{p}{,} \PY{n}{c} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{orange}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{s} \PY{o}{=} \PY{l+m+mi}{300}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{txt} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{v}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+             \PY{n}{val}\PY{o}{.}\PY{n}{annotate}\PY{p}{(}\PY{n}{txt}\PY{p}{,} \PY{p}{(}\PY{n}{xv}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{+} \PY{o}{.}\PY{l+m+mi}{01}\PY{p}{,} \PY{l+m+mi}{2} \PY{o}{+} \PY{n}{yv}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+             
+         
+         \PY{n}{xv} \PY{o}{=} \PY{n}{xv}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{xv}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{yv} \PY{o}{=} \PY{n}{yv}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{yv}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{n}{regrv} \PY{o}{=} \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}
+         \PY{n}{regrv}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{xv}\PY{p}{,} \PY{n}{yv}\PY{p}{)}
+         \PY{n}{val}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{xv}\PY{p}{,} \PY{n}{regrv}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{xv}\PY{p}{)}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{black}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{linewidth}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+         \PY{n}{val}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Valence vs Popularity}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n}{val}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{valence}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{15}\PY{p}{)}
+         \PY{n}{val}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{popularity (100 \PYZhy{} rank)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{fontsize} \PY{o}{=} \PY{l+m+mi}{15}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/Users/bigolu/.pyenv/versions/3.6.4/envs/cs439/lib/python3.6/site-packages/sklearn/linear\_model/base.py:509: RuntimeWarning: internal gelsd driver lwork query error, required iwork dimension not returned. This is likely the result of LAPACK bug 0038, fixed in LAPACK 3.2.2 (released July 21, 2010). Falling back to 'gelss' driver.
+  linalg.lstsq(X, y)
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:} Text(0,0.5,'popularity (100 - rank)')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{tree}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+         
+         \PY{k}{def} \PY{n+nf}{predict}\PY{p}{(}\PY{n}{features}\PY{p}{,} \PY{n}{labels}\PY{p}{)}\PY{p}{:}
+             \PY{n}{clf} \PY{o}{=} \PY{n}{tree}\PY{o}{.}\PY{n}{DecisionTreeClassifier}\PY{p}{(}\PY{p}{)}
+             \PY{n}{f\PYZus{}train}\PY{p}{,} \PY{n}{f\PYZus{}test}\PY{p}{,} \PY{n}{l\PYZus{}train}\PY{p}{,} \PY{n}{l\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{features}\PY{p}{,} \PY{n}{labels}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+             \PY{n}{clf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{f\PYZus{}train}\PY{p}{,} \PY{n}{l\PYZus{}train}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The score is }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{clf}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{f\PYZus{}test}\PY{p}{,} \PY{n}{l\PYZus{}test}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                   
+         \PY{c+c1}{\PYZsh{} gather features and labels}
+         \PY{n}{hits} \PY{o}{=} \PY{n}{sdata}\PY{o}{.}\PY{n}{as\PYZus{}matrix}\PY{p}{(}\PY{p}{)}
+         \PY{n}{hits} \PY{o}{=} \PY{p}{[}\PY{n}{row}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{:}\PY{l+m+mi}{11}\PY{p}{]} \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n}{hits}\PY{p}{]}
+         \PY{n}{lenhits} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{hits}\PY{p}{)}
+         \PY{n}{nothits} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{notpop.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{as\PYZus{}matrix}\PY{p}{(}\PY{p}{)}
+         \PY{n}{nothits} \PY{o}{=} \PY{p}{[}\PY{n}{row}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{:}\PY{l+m+mi}{11}\PY{p}{]} \PY{k}{for} \PY{n}{row} \PY{o+ow}{in} \PY{n}{nothits}\PY{p}{]}
+         \PY{n}{lennothits} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{nothits}\PY{p}{)}
+         \PY{n}{hits}\PY{o}{.}\PY{n}{extend}\PY{p}{(}\PY{n}{nothits}\PY{p}{)}
+         \PY{n}{labels} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{*} \PY{n}{lenhits}
+         \PY{n}{labels}\PY{o}{.}\PY{n}{extend}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{*} \PY{n}{lennothits}\PY{p}{)}
+         
+         \PY{n}{predict}\PY{p}{(}\PY{n}{hits}\PY{p}{,} \PY{n}{labels}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+The score is 0.6071428571428571
+
+    \end{Verbatim}
+
+    \hypertarget{acknowledgements}{%
+\subsection{Acknowledgements}\label{acknowledgements}}
+
+Other Works 1.
+http://cs229.stanford.edu/proj2011/BorgHokkanen-WhatMakesForAHitPopSong.pdf
+2.
+http://articles.latimes.com/2012/feb/03/science/la-sci-hit-songs-computer-20120204
+3. https://www.livescience.com/7016-science-hit-songs.html 4.
+https://sites.psu.edu/siowfa15/2015/12/03/what-makes-a-song-a-hit/
+
+Libraries 1. matplotlib 2. seaborn 3. scikit-learn 4. pandas
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
